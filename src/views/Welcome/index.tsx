@@ -1,95 +1,122 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Image, StyleSheet, Text, View } from "react-native";
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import {useNavigation} from '@react-navigation/native';
+import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Colors} from '../../utils/colors';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {Fonts} from '../../utils/fonts';
+import {AppButton} from '../../components/AppButton';
 
 export const Welcome = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    const handleNavigate = () => {
-        navigation.navigate('SignIn')
-    }
+  const handleGetStarted = () => {
+    navigation.navigate('SignIn');
+  };
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.content}>
-                <Image source={require('../../assets/images/logo.png')} />
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    marginTop: 16,
-                    paddingHorizontal: 20,
-                }}>
-                    <View style={styles.devStyle}>
-                        <Image style={{ marginRight: 5 }} source={require('../../assets/icons/devEducation.png')} />
-                        <Text style={{ fontSize: 18, color: '#234D70', fontWeight: '500' }}>DevEducation</Text>
-                    </View>
-                    <Text style={{ fontSize: 18, color: '#234D70', fontWeight: '400' }} >#codeforfuture</Text>
-                </View>
-                <View style={{ flexDirection: 'row', marginTop: 24 }}>
-                    <View style={styles.lineStyle} />
-                    <Text style={{ alignSelf: 'center', paddingHorizontal: 16, fontSize: 16, color: '#909EB0' }}>dəstəyi ilə</Text>
-                    <View style={styles.lineStyle} />
-                </View>
-                <View style={styles.textArea} >
-                    <Text style={{ color: '#234D70', fontSize: 36, fontWeight: '500' }}>Məzun sistem</Text>
-                    <Text style={{ textAlign: 'center', fontSize: 16, marginTop: 16, color: '#909EB0' }}>Bakı Dövlət Universitetinin yekun il diplom qiymətləndirilməsi sistemi</Text>
-                </View>
-            </View>
-
-            <TouchableOpacity onPress={handleNavigate} style={styles.button}>
-                <Text style={styles.buttonText}>Başlayın</Text>
-            </TouchableOpacity>
-
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.content}>
+        <Image
+          style={styles.bduLogo}
+          source={require('../../assets/images/bdu-logo.png')}
+        />
+        <View style={styles.helpers}>
+          <Image
+            style={styles.devEducation}
+            source={require('../../assets/images/dev-education-logo.png')}
+          />
+          <Text style={styles.codeForFuture}>#codeforfuture</Text>
         </View>
-    )
-}
-
-
+        <View style={styles.separator}>
+          <View style={styles.line} />
+          <Text style={styles.separatorText}>dəstəyi ilə</Text>
+          <View style={styles.line} />
+        </View>
+        <View style={styles.textArea}>
+          <Text style={styles.title}>Məzun sistem</Text>
+          <Text style={styles.description}>
+            Bakı Dövlət Universitetinin yekun il{'\n'}diplom qiymətləndirilməsi
+            sistemi
+          </Text>
+        </View>
+      </View>
+      <AppButton
+        label="Başlayın"
+        style={styles.button}
+        onPress={handleGetStarted}
+      />
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'white',
-    },
-    content: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 40,
-    },
-    devStyle: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-    },
-    textArea: {
-        flexDirection: 'column',
-        paddingHorizontal: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 24
-    },
-    lineStyle: {
-        backgroundColor: '#909EB0',
-        height: 1,
-        flex: 1,
-        alignSelf: 'center'
-    },
-    button: {
-        alignItems: 'center',
-        backgroundColor: '#1A5680',
-        marginHorizontal: 16,
-        paddingVertical: 9,
-        paddingHorizontal: 130,
-        borderRadius: 10,
-        marginBottom: 20,
-    },
-    buttonText: {
-        fontSize: 18,
-        color: 'white',
-    },
-})
+  container: {
+    flex: 1,
+    backgroundColor: Colors.white,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textArea: {
+    paddingHorizontal: 30,
+    gap: 16,
+  },
+  line: {
+    backgroundColor: Colors.blueLight,
+    height: 1,
+    flex: 1,
+  },
+  button: {
+    marginHorizontal: 16,
+    marginBottom: 20,
+  },
+  devEducation: {
+    height: 22,
+    width: 150,
+    resizeMode: 'contain',
+  },
+  codeForFuture: {
+    fontSize: 16,
+    fontFamily: Fonts.primary.Manrope.SemiBold,
+    color: Colors.blueDark,
+    textAlign: 'right',
+  },
+  helpers: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingHorizontal: 20,
+    marginTop: 16,
+  },
+  bduLogo: {
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+  },
+  separator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 24,
+  },
+  separatorText: {
+    paddingHorizontal: 16,
+    fontSize: 14,
+    color: Colors.blueLight,
+    fontFamily: Fonts.primary.Manrope.Medium,
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 32,
+    color: Colors.blueDark,
+    fontFamily: Fonts.primary.Manrope.SemiBold,
+  },
+  description: {
+    fontSize: 14,
+    color: Colors.blueLight,
+    fontFamily: Fonts.primary.Manrope.Medium,
+    textAlign: 'center',
+  },
+});
