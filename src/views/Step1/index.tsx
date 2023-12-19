@@ -3,6 +3,7 @@ import {View,Text, StyleSheet, TextInput, TouchableOpacity} from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
 import SvgComponent from '../../SvgIcon/ChevronIcon';
 import ChevronIcon from '../../SvgIcon/ChevronIcon';
+import { AppInput } from '../../components/AppInput';
 
 
 
@@ -18,12 +19,15 @@ function Step1(){
         </View>
         <View>
 
-            <TextInput
+            {/* <TextInput
         style={styles.input}
         onChangeText={ text => setText(text)}
         value={text}
         placeholder="Müəllim ad və ya soyadı"
-        />
+        /> */}
+
+        <AppInput
+        label='Müəllim ad və ya soyadı'/>
         </View>
         <View style={styles.areaText}>
             <Text style={styles.compText}>
