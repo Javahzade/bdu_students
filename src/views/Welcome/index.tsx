@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {Colors} from '../../utils/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Fonts} from '../../utils/fonts';
