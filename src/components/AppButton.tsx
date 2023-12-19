@@ -18,7 +18,7 @@ export const AppButton: React.FC<Props> = ({
 }) => {
   const backgroundColor =
     variant === 'primary'
-      ? Colors.blueDark
+      ? Colors.blue
       : variant === 'danger'
       ? Colors.danger
       : 'transparent';

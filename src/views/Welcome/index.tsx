@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginHorizontal: 16,
-    marginBottom: 20,
+    marginBottom: 16,
   },
   devEducation: {
     height: 22,
