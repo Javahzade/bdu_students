@@ -1,23 +1,54 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import { StyleSheet, ScrollView, View, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { AppHeader } from '../../components/AppHeader';
+import { AppInput } from '../../components/AppInput';
+import { AppButton } from '../../components/AppButton';
 
 export const SignUp = () => {
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Sign Up</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <AppHeader title='Qeydiyyat' canGoBack/>
+      <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent}>
+        <AppInput
+         label="*Ad və Soyad" 
+         placeholder="Tələbə adı və soyadı"
+         />
+        <AppInput label="*Qrup №" 
+        placeholder='Təhsil aldığın qrupun nömrəsi'
+        />
+        <AppInput label="Mobil nömrə"
+        />
+        <AppInput label="*E-poçt" 
+        placeholder='example@mail.com'
+        />
+        <AppInput label="*Şifrə" 
+        placeholder='*********' 
+        />
+      </ScrollView>
+      <AppButton style={styles.button} label="Qeydiyyatdan keç"  />
+    </SafeAreaView >
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  text: {
-    color: 'red',
-    fontSize: 24,
+  scroll: {
+    flex: 1,
+
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingHorizontal: 20
+  },
+  button: {
+    marginHorizontal: 20,
     marginBottom: 20,
+  },
+  countryCode: {
+
   },
 });
