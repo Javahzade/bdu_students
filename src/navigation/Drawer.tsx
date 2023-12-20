@@ -1,7 +1,8 @@
 import { DrawerToggleButton, createDrawerNavigator } from '@react-navigation/drawer';
 import React from 'react';
-import { PrivateAccount } from '../views/PrivateAccount';
+import { PrivateAccount } from '../views/Welcome';
 import CustomDrawer from '../components/CustomDrawer';
+import { Colors } from '../utils/colors';
 
 
 const Drawer = createDrawerNavigator()
@@ -17,9 +18,9 @@ export const DrawerNavigator = () => {
                 drawerPosition: 'left',
                 headerLeft: false,
                 headerRight: () => <DrawerToggleButton />,
-                headerTintColor: '#234D70',
-                
-            }} 
+                headerTintColor: Colors.blueDark,
+
+            }}
         >
             <Drawer.Screen options={{
                 title: 'Şəxsi Hesab',

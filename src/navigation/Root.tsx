@@ -1,11 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import { StackNavigator } from './Stack';
+import {AuthStackNavigator} from './AuthStack';
 
 export const Root: React.FC = () => {
-    return (
-        <NavigationContainer>
-            <StackNavigator />
-        </NavigationContainer>
-    )
-}
+  return (
+    <NavigationContainer>
+      <AuthStackNavigator />
+    </NavigationContainer>
+  );
+};
