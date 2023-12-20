@@ -1,4 +1,4 @@
-import { DrawerItemList, DrawerToggleButton, createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerToggleButton, createDrawerNavigator } from '@react-navigation/drawer';
 import React from 'react';
 import { PrivateAccount } from '../views/PrivateAccount';
 import CustomDrawer from '../components/CustomDrawer';
