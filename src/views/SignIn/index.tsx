@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import EyeIcon from '../../assets/icons/eye.svg';
 import EyeClosedIcon from '../../assets/icons/eye-closed.svg';
 import {useNavigation} from '@react-navigation/native';
@@ -38,7 +45,9 @@ export const SignIn = () => {
         <Text style={styles.title}>Giriş</Text>
         <Text style={styles.description}>Xoş gəlmisiniz!</Text>
       </View>
-      <View style={styles.inputs}>
+      <KeyboardAvoidingView
+        style={styles.inputs}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <AppInput
           placeholder="example@mail.com"
           label="E-poçt"
@@ -63,7 +72,7 @@ export const SignIn = () => {
           }
           onChangeText={onChangePasswordText}
         />
-      </View>
+      </KeyboardAvoidingView>
       <AppButton label="Daxil olun" onPress={handleLogIn} />
       <AppButton
         label="Qeydiyyatdan keç"
@@ -79,7 +88,7 @@ const styles = StyleSheet.create({
   area: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   header: {
     marginTop: 48,
