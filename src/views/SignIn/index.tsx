@@ -19,7 +19,9 @@ export const SignIn = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const handleLogIn = (): void => {};
+  const handleLogIn = (): void => {
+    navigation.navigate('DrawerNavigator')
+  };
 
   const handleSignUp = (): void => {
     navigation.navigate('SignUp');
