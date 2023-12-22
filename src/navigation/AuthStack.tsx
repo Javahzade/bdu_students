@@ -4,6 +4,7 @@ import {Welcome} from '../views/Welcome';
 import {SignIn} from '../views/SignIn';
 import {SignUp} from '../views/SignUp';
 import {HomeScreen} from '../views/HomeScreen';
+import WorkName from '../views/HomeScreen/WorkName';
 const Stack = createStackNavigator();
 
 export const AuthStackNavigator = () => {
@@ -15,6 +16,7 @@ export const AuthStackNavigator = () => {
       <Stack.Screen name="Welcome" component={HomeScreen} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="WorkName" component={WorkName} />
     </Stack.Navigator>
   );
 };

@@ -1,11 +1,16 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { Colors } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 export const HomeScreen = () => {
+  const navigation = useNavigation()
+  const gotoWorkName =()=>{
+    navigation.navigate('WorkName')
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -27,10 +32,13 @@ export const HomeScreen = () => {
         </View>
 
        <ScrollView>
-       <View style={styles.body2}>
+        <TouchableOpacity onPress={gotoWorkName}>
+        <View style={styles.body2}>
           <Text style={styles.text}>1. Tapşırığın adı</Text>
           <Text style={styles.review}>Baxışdadır{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
         </View>
+        </TouchableOpacity>
+       
         <View style={styles.body2}>
           <Text style={styles.text}>2. Tapşırığın adı</Text>
           <Text style={styles.accept}>Qəbul edildi{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
