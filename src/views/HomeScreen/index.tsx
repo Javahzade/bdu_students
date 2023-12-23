@@ -5,6 +5,7 @@ import { Colors } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import MenuIcon from "../../assets/icons/MenuIcon.svg";
 
 export const HomeScreen = () => {
   const navigation = useNavigation()
@@ -15,9 +16,9 @@ export const HomeScreen = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.textheader}>Mənim işlərim</Text>
-        <Image
-          source={require('../../assets/icons/menu.png')}
-        />
+        <TouchableOpacity>
+        <MenuIcon/>
+        </TouchableOpacity>
       </View>
       <View style={styles.body}>
             <Text style={styles.bodyText}>Müəllim:</Text>
