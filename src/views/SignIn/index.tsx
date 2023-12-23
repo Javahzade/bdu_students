@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import EyeIcon from '../../assets/icons/eye.svg';
 import EyeClosedIcon from '../../assets/icons/eye-closed.svg';
 import {useNavigation} from '@react-navigation/native';
@@ -8,18 +15,32 @@ import {Colors} from '../../utils/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Fonts} from '../../utils/fonts';
 import {AppInput} from '../../components/AppInput';
+import {useLoginMutation} from '../../redux/queries/auth';
+import {userSlice} from '../../redux/slices/userSlice';
+import {showMessage} from 'react-native-flash-message';
 
 export const SignIn = () => {
   const navigation = useNavigation();
-  const [emailValie, setEmailValue] = useState('');
+  const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [apiLogin] = useLoginMutation();
 
   const togglePasswordVisibility = (): void => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const handleLogIn = (): void => {};
+  const handleLogIn = async (): Promise<void> => {
+    apiLogin({email: emailValue, password: passwordValue})
+      .unwrap()
+      .then(res => userSlice.actions.setToken(res)) // set token
+      .catch(err =>
+        showMessage({
+          message: `Sistem xətası ${err.status}!`,
+          type: 'danger',
+        }),
+      );
+  };
 
   const handleSignUp = (): void => {
     navigation.navigate('SignUp');
@@ -38,16 +59,21 @@ export const SignIn = () => {
         <Text style={styles.title}>Giriş</Text>
         <Text style={styles.description}>Xoş gəlmisiniz!</Text>
       </View>
-      <View style={styles.inputs}>
+      <KeyboardAvoidingView
+        style={styles.inputs}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <AppInput
           placeholder="example@mail.com"
           label="E-poçt"
+          keyboardType="email-address"
+          autoCapitalize="none"
           onChangeText={onChangeEmailText}
         />
         <AppInput
           label="Şifrə"
           placeholder="*********"
-          secureTextEntry={passwordVisible}
+          secureTextEntry={!passwordVisible}
+          autoCapitalize="none"
           accessory={
             <TouchableOpacity onPress={togglePasswordVisibility}>
               {passwordVisible ? (
@@ -63,8 +89,12 @@ export const SignIn = () => {
           }
           onChangeText={onChangePasswordText}
         />
-      </View>
-      <AppButton label="Daxil olun" onPress={handleLogIn} />
+      </KeyboardAvoidingView>
+      <AppButton
+        label="Daxil olun"
+        disabled={!(emailValue && passwordValue)}
+        onPress={handleLogIn}
+      />
       <AppButton
         label="Qeydiyyatdan keç"
         variant="secondary"

@@ -7,6 +7,7 @@ interface Props {
   label: string;
   style?: ViewStyle;
   variant?: 'primary' | 'secondary' | 'danger';
+  disabled?: boolean;
   onPress: () => void;
 }
 
@@ -14,6 +15,7 @@ export const AppButton: React.FC<Props> = ({
   label,
   variant = 'primary',
   style,
+  disabled,
   onPress,
 }) => {
   const backgroundColor =
@@ -23,10 +25,12 @@ export const AppButton: React.FC<Props> = ({
       ? Colors.danger
       : 'transparent';
   const color = variant === 'secondary' ? Colors.blueDark : Colors.white;
+  const opacity = disabled ? 0.5 : 1;
 
   return (
     <TouchableOpacity
-      style={[styles.button, {backgroundColor}, style]}
+      disabled={disabled}
+      style={[styles.button, {backgroundColor, opacity}, style]}
       onPress={onPress}>
       <Text style={[styles.label, {color}]}>{label}</Text>
     </TouchableOpacity>
