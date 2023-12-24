@@ -15,9 +15,8 @@ const apiAuth = apiQuery.injectEndpoints({
     }),
     createUser: builder.mutation({
       query: data => {
-        console.log(data);
         return {
-          url: ApiUrl.createStudent,
+          url: ApiUrl.student,
           method: 'POST',
           body: data,
         };

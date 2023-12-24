@@ -18,9 +18,11 @@ import {AppInput} from '../../components/AppInput';
 import {useLoginMutation} from '../../redux/queries/auth';
 import {userSlice} from '../../redux/slices/userSlice';
 import {showMessage} from 'react-native-flash-message';
+import {useDispatch} from 'react-redux';
 
 export const SignIn = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -31,15 +33,20 @@ export const SignIn = () => {
   };
 
   const handleLogIn = async (): Promise<void> => {
-    apiLogin({email: emailValue, password: passwordValue})
+    apiLogin({
+      email: emailValue,
+      password: passwordValue,
+    })
       .unwrap()
-      .then(res => userSlice.actions.setToken(res)) // set token
-      .catch(err =>
+      .then(res => {
+        dispatch(userSlice.actions.setData(res));
+      })
+      .catch(err => {
         showMessage({
           message: `Sistem xətası ${err.status}!`,
           type: 'danger',
-        }),
-      );
+        });
+      });
   };
 
   const handleSignUp = (): void => {

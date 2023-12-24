@@ -5,7 +5,7 @@ export const apiQuery = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: ApiUrl.baseUrl,
-    headers: {'Content-type': 'application/json'},
+    headers: {'Content-Type': 'application/json'},
   }),
   endpoints: () => ({}),
 });
