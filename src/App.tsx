@@ -1,17 +1,30 @@
 import React from 'react';
 import {Root} from './navigation/Root';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {StyleSheet} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import {Provider} from 'react-redux';
-import {store} from './modules/store';
+import {PersistGate} from 'redux-persist/es/integration/react';
+import {persistor, store} from './redux/store';
+import FlashMessage from 'react-native-flash-message';
 
 export const App: React.FC = () => {
   return (
-    <Provider store={store}>
-      <SafeAreaProvider style={styles.area}>
-        <Root />
-      </SafeAreaProvider>
-    </Provider>
+    <PersistGate loading={null} persistor={persistor}>
+      <Provider store={store}>
+        <SafeAreaProvider style={styles.area}>
+          <StatusBar
+            translucent
+            barStyle="dark-content"
+            backgroundColor="transparent"
+          />
+          <Root />
+          <FlashMessage
+            position="top"
+            statusBarHeight={StatusBar.currentHeight}
+          />
+        </SafeAreaProvider>
+      </Provider>
+    </PersistGate>
   );
 };
 

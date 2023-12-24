@@ -15,18 +15,39 @@ import {Colors} from '../../utils/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Fonts} from '../../utils/fonts';
 import {AppInput} from '../../components/AppInput';
+import {useLoginMutation} from '../../redux/queries/auth';
+import {userSlice} from '../../redux/slices/userSlice';
+import {showMessage} from 'react-native-flash-message';
+import {useDispatch} from 'react-redux';
 
 export const SignIn = () => {
   const navigation = useNavigation();
-  const [emailValie, setEmailValue] = useState('');
+  const dispatch = useDispatch();
+  const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [apiLogin] = useLoginMutation();
 
   const togglePasswordVisibility = (): void => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const handleLogIn = (): void => {};
+  const handleLogIn = async (): Promise<void> => {
+    apiLogin({
+      email: emailValue,
+      password: passwordValue,
+    })
+      .unwrap()
+      .then(res => {
+        dispatch(userSlice.actions.setData(res));
+      })
+      .catch(err => {
+        showMessage({
+          message: `Sistem xətası ${err.status}!`,
+          type: 'danger',
+        });
+      });
+  };
 
   const handleSignUp = (): void => {
     navigation.navigate('SignUp');
@@ -51,12 +72,15 @@ export const SignIn = () => {
         <AppInput
           placeholder="example@mail.com"
           label="E-poçt"
+          keyboardType="email-address"
+          autoCapitalize="none"
           onChangeText={onChangeEmailText}
         />
         <AppInput
           label="Şifrə"
           placeholder="*********"
-          secureTextEntry={passwordVisible}
+          secureTextEntry={!passwordVisible}
+          autoCapitalize="none"
           accessory={
             <TouchableOpacity onPress={togglePasswordVisibility}>
               {passwordVisible ? (
@@ -73,7 +97,11 @@ export const SignIn = () => {
           onChangeText={onChangePasswordText}
         />
       </KeyboardAvoidingView>
-      <AppButton label="Daxil olun" onPress={handleLogIn} />
+      <AppButton
+        label="Daxil olun"
+        disabled={!(emailValue && passwordValue)}
+        onPress={handleLogIn}
+      />
       <AppButton
         label="Qeydiyyatdan keç"
         variant="secondary"
