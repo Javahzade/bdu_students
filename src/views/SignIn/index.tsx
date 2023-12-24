@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   area: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   header: {
     marginTop: 48,
