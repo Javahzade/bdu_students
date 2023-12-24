@@ -1,12 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
-import {Colors} from '../utils/colors';
+import {AppColors} from '../utils/colors';
 import {Fonts} from '../utils/fonts';
 
 interface Props {
   label: string;
   style?: ViewStyle;
   variant?: 'primary' | 'secondary' | 'danger';
+  disabled?: boolean;
   onPress: () => void;
 }
 
@@ -14,19 +15,22 @@ export const AppButton: React.FC<Props> = ({
   label,
   variant = 'primary',
   style,
+  disabled,
   onPress,
 }) => {
   const backgroundColor =
     variant === 'primary'
-      ? Colors.blue
+      ? AppColors.blue
       : variant === 'danger'
-      ? Colors.danger
+      ? AppColors.danger
       : 'transparent';
-  const color = variant === 'secondary' ? Colors.blueDark : Colors.white;
+  const color = variant === 'secondary' ? AppColors.blueDark : AppColors.white;
+  const opacity = disabled ? 0.5 : 1;
 
   return (
     <TouchableOpacity
-      style={[styles.button, {backgroundColor}, style]}
+      disabled={disabled}
+      style={[styles.button, {backgroundColor, opacity}, style]}
       onPress={onPress}>
       <Text style={[styles.label, {color}]}>{label}</Text>
     </TouchableOpacity>

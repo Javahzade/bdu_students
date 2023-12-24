@@ -7,11 +7,11 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {Colors} from '../utils/colors';
+import {AppColors} from '../utils/colors';
 import {Fonts} from '../utils/fonts';
 
 interface Props extends TextInputProps {
-  label: string;
+  label?: string;
   accessory?: React.ReactElement;
   style?: ViewStyle;
 }
@@ -38,13 +38,13 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   label: {
-    color: Colors.grayDark,
+    color: AppColors.grayDark,
     fontSize: 16,
     fontFamily: Fonts.primary.Manrope.Medium,
   },
   inputWrap: {
     borderWidth: 1,
-    borderColor: Colors.grayLight,
+    borderColor: AppColors.grayLight,
     borderRadius: 10,
     paddingHorizontal: 20,
     height: 46,
