@@ -1,9 +1,9 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Welcome} from '../views/Welcome';
 import {SignIn} from '../views/SignIn';
 import {SignUp} from '../views/SignUp';
-import WorkName from '../views/TaskScreen/WorkName';
+import {Welcome} from '../views/Welcome';
+
 const Stack = createStackNavigator();
 
 export const AuthStackNavigator = () => {
@@ -15,7 +15,6 @@ export const AuthStackNavigator = () => {
       <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="WorkName" component={WorkName} />
     </Stack.Navigator>
   );
 };

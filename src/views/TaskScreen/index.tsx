@@ -11,7 +11,7 @@ import TaskItem from './components/TaskItem';
 export const TaskScreen = () => {
   const navigation = useNavigation();
   const gotoWorkName = () => {
-    navigation.navigate('WorkName');
+    navigation.navigate('TaskDetailScreen');
   };
 
 

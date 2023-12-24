@@ -11,23 +11,47 @@ import EyeIcon from '../../assets/icons/eye.svg';
 import EyeClosedIcon from '../../assets/icons/eye-closed.svg';
 import {useNavigation} from '@react-navigation/native';
 import {AppButton} from '../../components/AppButton';
-import {Colors} from '../../utils/colors';
+import {AppColors} from '../../utils/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Fonts} from '../../utils/fonts';
 import {AppInput} from '../../components/AppInput';
+import {useLoginMutation} from '../../redux/queries/auth';
+import {userSlice} from '../../redux/slices/userSlice';
+import {showMessage} from 'react-native-flash-message';
+import {useDispatch} from 'react-redux';
 
 export const SignIn = () => {
   const navigation = useNavigation();
-  const [emailValie, setEmailValue] = useState('');
+  const dispatch = useDispatch();
+  const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [apiLogin] = useLoginMutation();
 
   const togglePasswordVisibility = (): void => {
     setPasswordVisible(!passwordVisible);
   };
 
+<<<<<<< HEAD
   const handleLogIn = (): void => {
     navigation.navigate('HomeScreen')
+=======
+  const handleLogIn = async (): Promise<void> => {
+    apiLogin({
+      email: emailValue,
+      password: passwordValue,
+    })
+      .unwrap()
+      .then(res => {
+        dispatch(userSlice.actions.setData(res));
+      })
+      .catch(err => {
+        showMessage({
+          message: `Sistem xətası ${err.status}!`,
+          type: 'danger',
+        });
+      });
+>>>>>>> 1469c9bcf0c4694eaa2bc26fb0276c424c2eccfe
   };
 
   const handleSignUp = (): void => {
@@ -53,29 +77,36 @@ export const SignIn = () => {
         <AppInput
           placeholder="example@mail.com"
           label="E-poçt"
+          keyboardType="email-address"
+          autoCapitalize="none"
           onChangeText={onChangeEmailText}
         />
         <AppInput
           label="Şifrə"
           placeholder="*********"
-          secureTextEntry={passwordVisible}
+          secureTextEntry={!passwordVisible}
+          autoCapitalize="none"
           accessory={
             <TouchableOpacity onPress={togglePasswordVisibility}>
               {passwordVisible ? (
                 <EyeClosedIcon
                   width={24}
                   height={24}
-                  stroke={Colors.grayDark}
+                  stroke={AppColors.grayDark}
                 />
               ) : (
-                <EyeIcon width={24} height={24} fill={Colors.grayDark} />
+                <EyeIcon width={24} height={24} fill={AppColors.grayDark} />
               )}
             </TouchableOpacity>
           }
           onChangeText={onChangePasswordText}
         />
       </KeyboardAvoidingView>
-      <AppButton label="Daxil olun" onPress={handleLogIn} />
+      <AppButton
+        label="Daxil olun"
+        disabled={!(emailValue && passwordValue)}
+        onPress={handleLogIn}
+      />
       <AppButton
         label="Qeydiyyatdan keç"
         variant="secondary"
@@ -89,7 +120,7 @@ export const SignIn = () => {
 const styles = StyleSheet.create({
   area: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.white,
     paddingHorizontal: 20,
   },
   header: {
@@ -98,14 +129,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     textAlign: 'center',
-    color: Colors.blueDark,
+    color: AppColors.blueDark,
     fontFamily: Fonts.primary.Manrope.SemiBold,
   },
   description: {
     marginTop: 16,
     fontSize: 16,
     textAlign: 'center',
-    color: Colors.blueLight,
+    color: AppColors.blueLight,
     fontFamily: Fonts.primary.Manrope.SemiBold,
   },
   inputs: {

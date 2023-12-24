@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {Colors} from '../../utils/colors';
+import {AppColors} from '../../utils/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Fonts} from '../../utils/fonts';
 import {AppButton} from '../../components/AppButton';
@@ -52,7 +52,7 @@ export const Welcome = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.white,
   },
   content: {
     flex: 1,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   line: {
-    backgroundColor: Colors.blueLight,
+    backgroundColor: AppColors.blueLight,
     height: 1,
     flex: 1,
   },
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   codeForFuture: {
     fontSize: 16,
     fontFamily: Fonts.primary.Manrope.SemiBold,
-    color: Colors.blueDark,
+    color: AppColors.blueDark,
     textAlign: 'right',
   },
   helpers: {
@@ -104,18 +104,18 @@ const styles = StyleSheet.create({
   separatorText: {
     paddingHorizontal: 16,
     fontSize: 14,
-    color: Colors.blueLight,
+    color: AppColors.blueLight,
     fontFamily: Fonts.primary.Manrope.Medium,
   },
   title: {
     textAlign: 'center',
     fontSize: 32,
-    color: Colors.blueDark,
+    color: AppColors.blueDark,
     fontFamily: Fonts.primary.Manrope.SemiBold,
   },
   description: {
     fontSize: 14,
-    color: Colors.blueLight,
+    color: AppColors.blueLight,
     fontFamily: Fonts.primary.Manrope.Medium,
     textAlign: 'center',
   },
