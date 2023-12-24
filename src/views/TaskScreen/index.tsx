@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlatList, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Colors} from '../../utils/colors';
+import {AppColors} from '../../utils/colors';
 import {Fonts} from '../../utils/fonts';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
@@ -108,7 +108,7 @@ export const TaskScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.white,
     paddingHorizontal: 16,
   },
   header: {
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   textheader: {
     fontSize: 26,
-    color: Colors.blueDark
+    color: AppColors.blueDark
   },
   body: {
     marginTop: 12,
@@ -140,21 +140,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '300',
     fontFamily: Fonts.primary.Manrope.SemiBold,
-    color: Colors.grayLight,
+    color: AppColors.grayLight,
   },
   bodyText1: {
     fontSize: 14,
     fontWeight: '600',
     fontFamily: Fonts.primary.Manrope.SemiBold,
-    color: Colors.blueDark,
+    color: AppColors.blueDark,
   },
   text: {
     marginTop: 15,
-    color: Colors.blueDark,
+    color: AppColors.blueDark,
     fontSize: 17,
   },
   review: {
-    color: Colors.yellow,
+    color: AppColors.yellow,
     fontSize: 17,
   },
   accept: {
@@ -162,11 +162,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   refuse: {
-    color: Colors.danger,
+    color: AppColors.danger,
     fontSize: 17,
   },
   textdate: {
-    color: Colors.grayLight,
+    color: AppColors.grayLight,
   },
 });
 export default TaskScreen;

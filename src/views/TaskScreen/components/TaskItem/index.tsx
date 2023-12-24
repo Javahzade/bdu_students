@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {Colors} from "../../../../utils/colors";
+import {AppColors} from "../../../../utils/colors";
 
 
 interface TaskItemProps {
@@ -37,14 +37,14 @@ const styles = StyleSheet.create({
     },
     text: {
         marginTop: 15,
-        color: Colors.blueDark,
+        color: AppColors.blueDark,
         fontSize: 17,
     },
     statusText: {
-        color: Colors.yellow,
+        color: AppColors.yellow,
         fontSize: 17,
     },
     dateText: {
-        color: Colors.grayLight,
+        color: AppColors.grayLight,
     },
 });

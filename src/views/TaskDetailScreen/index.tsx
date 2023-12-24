@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Colors} from '../../utils/colors';
+import {AppColors, Colors} from '../../utils/colors';
 import {Fonts} from '../../utils/fonts';
 import ChevronLeft from "../../assets/icons/ChevronLeft.svg";
 import JpegIcon from "../../assets/icons/JpegIcon.svg";
@@ -101,8 +101,8 @@ function TaskDetailScreen() {
                 </View>
             </ScrollView>
             <View style={{height: 100, width: 40, position: 'absolute', zIndex: 3, bottom: 20, right: 16, justifyContent: 'space-between'}}>
-                <TouchableOpacity style={{width: 48, height: 48, borderRadius: 48, backgroundColor: Colors.blueDark, justifyContent: 'center', alignItems: "center"}}><FireArrowUp /></TouchableOpacity>
-                <TouchableOpacity style={{width: 48, height: 48, borderRadius: 48, backgroundColor: Colors.blueDark, justifyContent: 'center', alignItems: "center"}}><ChatDots /></TouchableOpacity>
+                <TouchableOpacity style={{width: 48, height: 48, borderRadius: 48, backgroundColor: AppColors.blueDark, justifyContent: 'center', alignItems: "center"}}><FireArrowUp /></TouchableOpacity>
+                <TouchableOpacity style={{width: 48, height: 48, borderRadius: 48, backgroundColor: AppColors.blueDark, justifyContent: 'center', alignItems: "center"}}><ChatDots /></TouchableOpacity>
             </View>
 
 
@@ -115,7 +115,7 @@ export default TaskDetailScreen;
 const styles = StyleSheet.create({
     area: {
         flex: 1,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.white,
         paddingHorizontal: 16,
     },
     iconText: {
@@ -131,13 +131,13 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     text1: {
-        color: Colors.blueDark,
+        color: AppColors.blueDark,
         fontSize: 24,
         fontFamily: Fonts.primary.Manrope.SemiBold,
         marginLeft: 10,
     },
     review: {
-        color: Colors.yellow,
+        color: AppColors.yellow,
         fontSize: 17,
     },
     body: {
@@ -147,21 +147,21 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '300',
         fontFamily: Fonts.primary.Manrope.SemiBold,
-        color: Colors.grayLight,
+        color: AppColors.grayLight,
         marginTop: 15,
     },
     bodyText1: {
         fontSize: 14,
         fontWeight: '400',
         fontFamily: Fonts.primary.Manrope.SemiBold,
-        color: Colors.blueDark,
+        color: AppColors.blueDark,
     },
     comment: {
         marginTop: 7,
         fontSize: 14,
         fontWeight: '400',
         fontFamily: Fonts.primary.Manrope.SemiBold,
-        color: Colors.blueDark,
+        color: AppColors.blueDark,
     },
     resource: {
         flexDirection: "row",
@@ -171,14 +171,14 @@ const styles = StyleSheet.create({
     line: {
         width: '100%',
         height: 1,
-        backgroundColor: Colors.grayLight,
+        backgroundColor: AppColors.grayLight,
         marginTop: 10,
     },
     commenttext: {
         fontSize: 16,
         fontWeight: '300',
         fontFamily: Fonts.primary.Manrope.SemiBold,
-        color: Colors.grayLight,
+        color: AppColors.grayLight,
         marginTop: 5,
     }
 });
