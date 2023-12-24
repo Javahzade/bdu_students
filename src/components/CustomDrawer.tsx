@@ -4,7 +4,6 @@ import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors } from '../utils/colors';
 import { Fonts } from '../utils/fonts';
-import Person from '../assets/icons/person.svg';
 import SignOut from '../assets/icons/sign-out.svg';
 
 const CustomDrawer = props => {

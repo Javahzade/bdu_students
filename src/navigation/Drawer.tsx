@@ -6,7 +6,6 @@ import { PrivateAccount } from '../views/PrivateAccount';
 import Person from '../assets/icons/person.svg';
 
 
-
 const Drawer = createDrawerNavigator()
 
 export const DrawerNavigator = () => {
