@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text, StyleSheet, TouchableOpacity, FlatList, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SliderIcon from '../../assets/icons/sliders.svg';
 import {AppInput} from '../../components/AppInput';
@@ -9,50 +9,65 @@ import {Fonts} from '../../utils/fonts';
 import {useNavigation} from '@react-navigation/native';
 import {AppHeader} from '../../components/AppHeader';
 import {AppAccordion} from '../../components/AppAccordion';
-import {useFacultyQuery, useTeachersQuery} from '../../redux/queries/teacher';
+import {useTeachersQuery} from '../../redux/queries/teacher';
+import {CheckBox} from '../../components/CheckBox';
+
+interface TeacherProps {
+  fullName: string;
+  subjects: string[];
+}
+
+const TeacherItem: React.FC<TeacherProps> = ({fullName, subjects}) => {
+  return (
+    <View style={{flex: 1}}>
+      <Text>{fullName}</Text>
+      <Text style={styles.footerText}>
+        {subjects.map(x => x.name).join(', ')}
+      </Text>
+    </View>
+  );
+};
 
 export const StepOne: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
-
+  const [selectedTeacherId, setSelectedTeacherId] = useState(null);
   const {searchResult} = useTeachersQuery(undefined, {
-    selectFromResult: ({data}) => {
-      const uniqueFaculties = Array.from(
-        new Set(data?.map(item => JSON.stringify(item.faculty))),
-      ).map(item => JSON.parse(item));
-      const newData = uniqueFaculties.map(item => ({
-        ...item,
-        teachers: data.filter(elem => elem.faculty.id === item.id),
-      }));
-
-      return {
-        searchResult: newData,
-      };
-    },
+    selectFromResult: ({data}) => ({searchResult: data}),
   });
-
-  console.log(searchResult);
 
   const handleStep1 = (): void => {};
 
   const navigation = useNavigation();
 
   const gotoFilter = () => {
-    navigation.navigate('Filter');
+    navigation.navigate('Filters');
   };
 
   const onChangeSearchText = text => {
     setSearchValue(text);
   };
 
-  const renderItem = React.useCallback(({item, index}) => {
-    return (
-      <AppAccordion title={item.name}>
-        {item.teachers.map(elem => (
-          <Text key={elem.id}>{elem.firstName}</Text>
-        ))}
-      </AppAccordion>
-    );
-  }, []);
+  const renderItem = React.useCallback(
+    ({item}) => {
+      return (
+        <AppAccordion title={item.name} expanded>
+          {item.teachers.map(elem => (
+            <View style={styles.teachers}>
+              <TeacherItem
+                fullName={elem.firstName + ' ' + elem.lastName}
+                subjects={elem.subjects}
+              />
+              <CheckBox
+                checked={elem.id === selectedTeacherId}
+                onPress={() => setSelectedTeacherId(elem.id)}
+              />
+            </View>
+          ))}
+        </AppAccordion>
+      );
+    },
+    [selectedTeacherId],
+  );
 
   const keyExtractor = React.useCallback(item => `${item.id}`, []);
 
@@ -144,7 +159,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: Fonts.primary.Manrope.SemiBold,
     color: '#234D70',
-    // marginTop:11,
   },
   bodyText1: {
     fontSize: 12,
@@ -152,5 +166,18 @@ const styles = StyleSheet.create({
   },
   body: {
     marginLeft: 30,
+  },
+  teachers: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 8,
+    paddingLeft: 10,
+  },
+  footerText: {
+    fontSize: 12,
+    color: AppColors.blueLight,
+    fontFamily: Fonts.primary.Manrope.Medium,
+    marginTop: 8,
   },
 });

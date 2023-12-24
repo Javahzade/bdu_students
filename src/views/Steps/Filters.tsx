@@ -1,57 +1,77 @@
-import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Fonts} from '../../utils/fonts';
 import ChevronIcon from '../../SvgIcon/ChevronIcon';
 import {AppButton} from '../../components/AppButton';
 import Squary from '../../SvgIcon/Squary';
+import {AppHeader} from '../../components/AppHeader';
+import {useFacultyQuery, useSubjectQuery} from '../../redux/queries/teacher';
+import {AppAccordion} from '../../components/AppAccordion';
+import {CheckBox} from '../../components/CheckBox';
+import {useDispatch} from 'react-redux';
+import {userSlice} from '../../redux/slices/userSlice';
 
 export const Filters: React.FC = () => {
-  const handleFilter = (): void => {};
-  return (
-    <SafeAreaView style={styles.area1}>
-      <View style={styles.header}>
-        <Text style={styles.text1}>Filter</Text>
-      </View>
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}>
-        <View style={styles.areaText}>
-          <Text style={styles.compText}>Fakultələr</Text>
+  const dispatch = useDispatch();
+  const [filters, setFilters] = useState([]);
+  const {faculty} = useFacultyQuery(undefined, {
+    selectFromResult: ({data}) => ({faculty: data || []}),
+  });
+  const {subject} = useSubjectQuery(undefined, {
+    selectFromResult: ({data}) => ({subject: data || []}),
+  });
+  const data = [
+    {title: 'Fakültələr', data: faculty},
+    {title: 'Ixtisaslar', data: subject},
+  ];
+  const handleFilter = (): void => {
+    dispatch(userSlice.actions.setFilters(filters));
+  };
 
-          <ChevronIcon />
-        </View>
-        <View style={styles.body}>
-          <Text style={styles.bodyText}> Tətbiqi riyaziyyat</Text>
-          <Squary />
-          <Text style={styles.bodyText}> Fizika-Kimya</Text>
-          <Squary />
-          <Text style={styles.bodyText}> Biologiya</Text>
-          <Squary />
-        </View>
-        <View style={styles.areaText}>
-          <Text style={styles.compText}>İxtisaslar</Text>
-
-          <ChevronIcon />
-        </View>
-        <View style={styles.body}>
-          <View style={styles.bodyArea}>
-            <Text style={styles.bodyText}> İnformatika</Text>
-            <Squary />
+  const renderItem = React.useCallback(({item}) => {
+    return (
+      <AppAccordion title={item.title} expanded>
+        {item.data.map(elem => (
+          <View key={elem.id} style={styles.content}>
+            <Text>{elem.name}</Text>
+            <CheckBox
+              checked={elem.id === filters.includes(elem.id)}
+              onPress={() =>
+                setFilters(prev => {
+                  if (prev.includes(elem.id)) {
+                    return prev.filter(x => x.id !== elem.id);
+                  } else {
+                    [...prev, elem.id];
+                  }
+                })
+              }
+            />
           </View>
-          <Text style={styles.bodyText}> Komputer elmləri</Text>
-          <Squary />
-          <Text style={styles.bodyText}> Fizika</Text>
-          <Squary />
-        </View>
-      </ScrollView>
+        ))}
+      </AppAccordion>
+    );
+  }, []);
 
+  const keyExtractor = React.useCallback(item => `${item.title}`, []);
+
+  return (
+    <View style={styles.area1}>
+      <AppHeader title="Filter" />
+      <FlatList
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+      />
       <AppButton
         label="Filterlə"
         style={styles.button}
         onPress={handleFilter}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -106,5 +126,12 @@ const styles = StyleSheet.create({
   },
   bodyArea: {
     flexDirection: 'row',
+  },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 8,
+    paddingLeft: 10,
   },
 });
