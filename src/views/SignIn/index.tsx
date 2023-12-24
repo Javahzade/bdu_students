@@ -32,10 +32,6 @@ export const SignIn = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-<<<<<<< HEAD
-  const handleLogIn = (): void => {
-    navigation.navigate('HomeScreen')
-=======
   const handleLogIn = async (): Promise<void> => {
     apiLogin({
       email: emailValue,
@@ -51,7 +47,6 @@ export const SignIn = () => {
           type: 'danger',
         });
       });
->>>>>>> 1469c9bcf0c4694eaa2bc26fb0276c424c2eccfe
   };
 
   const handleSignUp = (): void => {
