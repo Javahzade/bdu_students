@@ -24,7 +24,7 @@ export const AppInput: React.FC<Props> = ({
 }) => {
   return (
     <View style={[styles.container, style]}>
-      <Text style={styles.label}>{label}</Text>
+      {label && <Text style={styles.label}>{label}</Text>}
       <View style={styles.inputWrap}>
         <TextInput style={styles.input} {...props} />
         {accessory && accessory}
