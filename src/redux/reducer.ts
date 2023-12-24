@@ -7,7 +7,7 @@ import {userSlice} from './slices/userSlice';
 const userConfig = {
   key: 'user',
   storage: AsyncStorage,
-  whitelist: ['token'],
+  whitelist: ['token', 'id'],
 };
 
 export const reducer = combineReducers({

@@ -1,18 +1,37 @@
 import React from 'react';
-import {Button, Text} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch} from 'react-redux';
 import {userSlice} from '../../redux/slices/userSlice';
+import {AppHeader} from '../../components/AppHeader';
+import MenuIcon from '../../assets/icons/menu.svg';
+import {Colors} from '../../utils/colors';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 
 export const Home: React.FC = () => {
-  const dispatch = useDispatch();
-  const handleLogOut = () => {
-    dispatch(userSlice.actions.logOut());
+  const navigation = useNavigation();
+
+  const toggleDrawer = () => {
+    navigation.dispatch(DrawerActions.toggleDrawer());
   };
+
   return (
-    <SafeAreaView>
-      <Text>Home</Text>
-      <Button title="Log Out" onPress={handleLogOut} />
+    <SafeAreaView style={styles.area}>
+      <AppHeader
+        title="Mənim işlərim"
+        rightAccessory={
+          <TouchableOpacity onPress={toggleDrawer}>
+            <MenuIcon width={24} height={24} stroke={Colors.blueDark} />
+          </TouchableOpacity>
+        }
+      />
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  area: {
+    flex: 1,
+    backgroundColor: Colors.white,
+  },
+});

@@ -1,5 +1,6 @@
 import {ApiUrl} from '../../../utils/apiUrl';
 import {apiQuery} from '../../../services/api';
+import {store} from '../../store';
 
 const apiUser = apiQuery.injectEndpoints({
   overrideExisting: true,
@@ -9,6 +10,9 @@ const apiUser = apiQuery.injectEndpoints({
         return {
           url: ApiUrl.student + '/' + params.id,
           method: 'GET',
+          headers: {
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
         };
       },
     }),
