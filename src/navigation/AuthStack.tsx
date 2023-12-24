@@ -3,8 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Welcome} from '../views/Welcome';
 import {SignIn} from '../views/SignIn';
 import {SignUp} from '../views/SignUp';
-import {HomeScreen} from '../views/HomeScreen';
-import WorkName from '../views/HomeScreen/WorkName';
+import WorkName from '../views/TaskScreen/WorkName';
 const Stack = createStackNavigator();
 
 export const AuthStackNavigator = () => {
@@ -13,7 +12,7 @@ export const AuthStackNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="Welcome" component={HomeScreen} />
+      <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="WorkName" component={WorkName} />
