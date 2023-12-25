@@ -7,6 +7,11 @@ import {useUserInfoQuery} from '../redux/queries/user';
 import {DrawerNavigator} from './Drawer';
 import {Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {StepOne} from '../views/Steps/One';
+import {StepTwo} from '../views/Steps/Two';
+import {Filters} from '../views/Steps/Filters';
+import TaskScreen from '../views/TaskScreen';
+import TaskDetailScreen from '../views/TaskDetailScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,11 +20,9 @@ export const MainStackNavigator = () => {
   const {id} = useSelector((state: RootState) => state.user);
   const {data} = useUserInfoQuery({id});
 
-  console.log(data);
-
   useEffect(() => {
     if (!data?.teacher) {
-      navigation.navigate('Step1');
+      navigation.navigate('StepOne');
     }
   }, [data, navigation]);
 
@@ -30,7 +33,11 @@ export const MainStackNavigator = () => {
       }}>
       <Stack.Screen name="Drawer" component={DrawerNavigator} />
       <Stack.Group screenOptions={{presentation: 'modal'}}>
-        <Stack.Screen name="Step1" component={() => <Text>1</Text>} />
+        <Stack.Screen name="StepOne" component={StepOne} />
+        <Stack.Screen name="StepTwo" component={StepTwo} />
+        <Stack.Screen name="Filters" component={Filters} />
+        <Stack.Screen name="TaskScreen" component={TaskScreen} />
+        <Stack.Screen name="TaskDetailScreen" component={TaskDetailScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );

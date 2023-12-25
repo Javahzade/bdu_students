@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
-import {Colors} from '../utils/colors';
+import {AppColors} from '../utils/colors';
 import {Fonts} from '../utils/fonts';
 
 interface Props {
@@ -20,11 +20,11 @@ export const AppButton: React.FC<Props> = ({
 }) => {
   const backgroundColor =
     variant === 'primary'
-      ? Colors.blue
+      ? AppColors.blue
       : variant === 'danger'
-      ? Colors.danger
+      ? AppColors.danger
       : 'transparent';
-  const color = variant === 'secondary' ? Colors.blueDark : Colors.white;
+  const color = variant === 'secondary' ? AppColors.blueDark : AppColors.white;
   const opacity = disabled ? 0.5 : 1;
 
   return (

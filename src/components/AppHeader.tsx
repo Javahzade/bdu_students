@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import {Colors} from '../utils/colors';
+import {AppColors} from '../utils/colors';
 import {Fonts} from '../utils/fonts';
 import BackIcon from '../assets/icons/chevron-right.svg';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -26,7 +26,7 @@ export const AppHeader: React.FC<Props> = ({
       <View style={styles.left}>
         {canGoBack && (
           <TouchableOpacity onPress={handleGoBack}>
-            <BackIcon width={24} height={24} stroke={Colors.blueDark} />
+            <BackIcon width={24} height={24} stroke={AppColors.blueDark} />
           </TouchableOpacity>
         )}
         <Text style={styles.title}>{title}</Text>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    color: Colors.blueDark,
+    color: AppColors.blueDark,
     fontFamily: Fonts.primary.Manrope.SemiBold,
   },
   left: {

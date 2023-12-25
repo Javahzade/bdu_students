@@ -10,7 +10,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppHeader} from '../../components/AppHeader';
 import {AppInput} from '../../components/AppInput';
 import {AppButton} from '../../components/AppButton';
-import {Colors} from '../../utils/colors';
+import {AppColors} from '../../utils/colors';
 import EyeIcon from '../../assets/icons/eye.svg';
 import EyeClosedIcon from '../../assets/icons/eye-closed.svg';
 import {useCreateUserMutation} from '../../redux/queries/auth';
@@ -118,10 +118,10 @@ export const SignUp = () => {
                   <EyeClosedIcon
                     width={24}
                     height={24}
-                    stroke={Colors.grayDark}
+                    stroke={AppColors.grayDark}
                   />
                 ) : (
-                  <EyeIcon width={24} height={24} fill={Colors.grayDark} />
+                  <EyeIcon width={24} height={24} fill={AppColors.grayDark} />
                 )}
               </TouchableOpacity>
             }
@@ -144,7 +144,7 @@ export const SignUp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.white,
   },
   scroll: {
     flex: 1,

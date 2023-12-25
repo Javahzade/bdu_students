@@ -2,7 +2,7 @@ import {DrawerContentScrollView} from '@react-navigation/drawer';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Colors} from '../utils/colors';
+import {AppColors} from '../utils/colors';
 import {Fonts} from '../utils/fonts';
 import SignOut from '../assets/icons/sign-out.svg';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -46,10 +46,10 @@ export default CustomDrawer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.white,
   },
   bduLogo: {
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.white,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   codeForFuture: {
     fontSize: 16,
     fontFamily: Fonts.primary.Manrope.SemiBold,
-    color: Colors.blueDark,
+    color: AppColors.blueDark,
     textAlign: 'right',
   },
   devEducationLogo: {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   signOutText: {
-    color: Colors.blueDark,
+    color: AppColors.blueDark,
     fontFamily: Fonts.primary.Manrope.Medium,
     fontSize: 16,
     marginLeft: 10,

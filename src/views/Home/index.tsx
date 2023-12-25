@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import {userSlice} from '../../redux/slices/userSlice';
 import {AppHeader} from '../../components/AppHeader';
 import MenuIcon from '../../assets/icons/menu.svg';
-import {Colors} from '../../utils/colors';
+import {AppColors} from '../../utils/colors';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 
 export const Home: React.FC = () => {
@@ -21,7 +21,7 @@ export const Home: React.FC = () => {
         title="Mənim işlərim"
         rightAccessory={
           <TouchableOpacity onPress={toggleDrawer}>
-            <MenuIcon width={24} height={24} stroke={Colors.blueDark} />
+            <MenuIcon width={24} height={24} stroke={AppColors.blueDark} />
           </TouchableOpacity>
         }
       />
@@ -32,6 +32,6 @@ export const Home: React.FC = () => {
 const styles = StyleSheet.create({
   area: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.white,
   },
 });

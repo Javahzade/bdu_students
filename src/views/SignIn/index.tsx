@@ -11,7 +11,7 @@ import EyeIcon from '../../assets/icons/eye.svg';
 import EyeClosedIcon from '../../assets/icons/eye-closed.svg';
 import {useNavigation} from '@react-navigation/native';
 import {AppButton} from '../../components/AppButton';
-import {Colors} from '../../utils/colors';
+import {AppColors} from '../../utils/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Fonts} from '../../utils/fonts';
 import {AppInput} from '../../components/AppInput';
@@ -87,10 +87,10 @@ export const SignIn = () => {
                 <EyeClosedIcon
                   width={24}
                   height={24}
-                  stroke={Colors.grayDark}
+                  stroke={AppColors.grayDark}
                 />
               ) : (
-                <EyeIcon width={24} height={24} fill={Colors.grayDark} />
+                <EyeIcon width={24} height={24} fill={AppColors.grayDark} />
               )}
             </TouchableOpacity>
           }
@@ -115,7 +115,7 @@ export const SignIn = () => {
 const styles = StyleSheet.create({
   area: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.white,
     paddingHorizontal: 20,
   },
   header: {
@@ -124,14 +124,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     textAlign: 'center',
-    color: Colors.blueDark,
+    color: AppColors.blueDark,
     fontFamily: Fonts.primary.Manrope.SemiBold,
   },
   description: {
     marginTop: 16,
     fontSize: 16,
     textAlign: 'center',
-    color: Colors.blueLight,
+    color: AppColors.blueLight,
     fontFamily: Fonts.primary.Manrope.SemiBold,
   },
   inputs: {
