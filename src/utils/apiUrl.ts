@@ -5,4 +5,5 @@ export const ApiUrl = {
   teacher: '/Teacher',
   options: '/Options',
   application: '/Application',
+  work: '/Work'
 };

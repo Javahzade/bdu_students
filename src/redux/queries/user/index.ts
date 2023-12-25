@@ -39,6 +39,29 @@ const apiUser = apiQuery.injectEndpoints({
         };
       },
     }),
+    getWork: builder.query({
+      query: id => {
+        return {
+          url: ApiUrl.work + '/' + id,
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        };
+      },
+
+    }),
+    changeWorkState: builder.mutation<undefined, {studentId: number; taskid: number;}>({
+      query: ({studentId, taskid}) => {
+        return {
+          url: ApiUrl.work + '/' + studentId + '/' + taskid,
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -46,4 +69,6 @@ export const {
   useUserInfoQuery,
   useGetApplicationQuery,
   useSendApplicationMutation,
+  useGetWorkQuery,
+  useChangeWorkStateMutation,
 } = apiUser;

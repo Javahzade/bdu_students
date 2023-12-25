@@ -12,18 +12,29 @@ import {Fonts} from '../../utils/fonts';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import MenuIcon from '../../assets/icons/MenuIcon.svg';
 import TaskCard from './components/TaskCard';
-import {useGetApplicationQuery} from '../../redux/queries/user';
+import {useGetApplicationQuery, useGetWorkQuery} from '../../redux/queries/user';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {AppButton} from '../../components/AppButton';
 import {AppHeader} from '../../components/AppHeader';
+import TaskDetailScreen from '../TaskDetailScreen';
 
 export const TaskScreen = ({}) => {
   const navigation = useNavigation();
-  const {id} = useSelector((state: RootState) => state.user);
+  const {id, token} = useSelector((state: RootState) => state.user);
   const {data} = useGetApplicationQuery(id, {pollingInterval: 3000});
+  const {work} = useGetWorkQuery(id, {
+    pollingInterval: 3000,
+    selectFromResult: ({data}) => {
+      return {
+        work: data || []
+      };
+    }
+  });
+  // console.log("id==>>", id, "token=>", token);
+  console.log("myWork", work);
 
-  console.log(data);
+  // console.log(data);
   const gotoWorkName = () => {
     navigation.navigate('TaskDetailScreen');
   };
@@ -49,9 +60,11 @@ export const TaskScreen = ({}) => {
         </View>
       );
     }
-
+    if (work.length) {
+      return work.map((item: any) => <TaskDetailScreen key={item.id} {...item} />);
+    }
     return <TaskCard {...data} />;
-  }, [data, handleNewApplication]);
+  }, [data, handleNewApplication, work]);
 
   return (
     <SafeAreaView style={styles.container}>

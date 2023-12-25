@@ -5,6 +5,7 @@ import {TASK_STATUS} from '../../../../enums/application.enum';
 import {AppButton} from '../../../../components/AppButton';
 import {useNavigation} from '@react-navigation/native';
 import {Fonts} from '../../../../utils/fonts';
+import {useChangeWorkStateMutation} from '../../../../redux/queries/user';
 
 interface ITaskCard {
   teachersFullName: string;
@@ -21,6 +22,7 @@ const TaskCard = ({
   const status = TASK_STATUS[applicationState];
   const isConsidered = applicationState === 1;
   const isAccepted = applicationState === 2;
+  // const [apiChangeWorkState] = useChangeWorkStateMutation();
 
   const rejectApplication = () => {
     console.log('rejectApplication');
@@ -29,7 +31,8 @@ const TaskCard = ({
   const handleApplication = () => {
     if (isConsidered) {
     } else {
-      navigation.navigate('StepOne');
+      // navigation.navigate('StepOne');
+      // apiChangeWorkState({workState: 1});
     }
   };
 
@@ -42,8 +45,8 @@ const TaskCard = ({
           backgroundColor: isAccepted
             ? '#24FF001A'
             : isConsidered
-            ? '#FFC0001A'
-            : '#FF005D1A',
+              ? '#FFC0001A'
+              : '#FF005D1A',
           borderRadius: 10,
         }}>
         <View
