@@ -33,7 +33,7 @@ export const MainStackNavigator = () => {
       }}>
       <Stack.Screen name="Drawer" component={DrawerNavigator} />
       <Stack.Group screenOptions={{presentation: 'modal'}}>
-        <Stack.Screen name="StepOne" component={StepOne} />
+        <Stack.Screen name="StepOne" component={TaskScreen} />
         <Stack.Screen name="StepTwo" component={StepTwo} />
         <Stack.Screen name="Filters" component={Filters} />
         <Stack.Screen name="TaskScreen" component={TaskScreen} />

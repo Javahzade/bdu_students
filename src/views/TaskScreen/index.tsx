@@ -7,8 +7,12 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import MenuIcon from "../../assets/icons/MenuIcon.svg";
 import TaskItem from './components/TaskItem';
+import TaskCard from './components/TaskCard';
 
-export const TaskScreen = () => {
+
+
+
+export const TaskScreen = ({}) => {
   const navigation = useNavigation();
   const gotoWorkName = () => {
     navigation.navigate('TaskDetailScreen');
@@ -31,13 +35,16 @@ export const TaskScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+
       <View style={styles.header}>
         <Text style={styles.textheader}>Mənim işlərim</Text>
         <TouchableOpacity>
           <MenuIcon />
         </TouchableOpacity>
       </View>
-      <View style={styles.body}>
+      <TaskCard />
+
+      {/* <View style={styles.body}>
         <Text style={styles.bodyText}>Müəllim:</Text>
         <Text style={styles.bodyText1}>Aqil M.Quliyev</Text>
       </View>
@@ -57,50 +64,7 @@ export const TaskScreen = () => {
             return <TaskItem onPressTask={() => onPressTask(item.id)} taskTitle={item.taskTitle} taskStatus={item.taskStatus} statusDate={item.statusDate} />;
           }}
         />
-        {/* <View style={styles.body2}>
-          <Text style={styles.text}>2. Tapşırığın adı</Text>
-          <Text style={styles.accept}>Qəbul edildi{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
-        </View>
-        <View style={styles.body2}>
-          <Text style={styles.text}>3. Tapşırığın adı</Text>
-          <Text style={styles.refuse}>İmtina edildi{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
-        </View>
-        <View style={styles.body2}>
-          <Text style={styles.text}>4. Tapşırığın adı</Text>
-          <Text style={styles.accept}>Qəbul edildi{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
-        </View>
-        <View style={styles.body2}>
-          <Text style={styles.text}>5. Tapşırığın adı</Text>
-          <Text style={styles.refuse}>İmtina edildi{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
-        </View>
-        <View style={styles.body2}>
-          <Text style={styles.text}>6. Tapşırığın adı</Text>
-          <Text style={styles.review}>Baxışdadır{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
-        </View>
-        <View style={styles.body2}>
-          <Text style={styles.text}>7. Tapşırığın adı</Text>
-          <Text style={styles.accept}>Qəbul edildi{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
-        </View>
-        <View style={styles.body2}>
-          <Text style={styles.text}>8. Tapşırığın adı</Text>
-          <Text style={styles.refuse}>İmtina edildi{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
-        </View>
-        <View style={styles.body2}>
-          <Text style={styles.text}>9. Tapşırığın adı</Text>
-          <Text style={styles.review}>Baxışdadır{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
-        </View>
-        <View style={styles.body2}>
-          <Text style={styles.text}>10. Tapşırığın adı</Text>
-          <Text style={styles.accept}>Qəbul edildi{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
-        </View>
-        <View style={styles.body2}>
-          <Text style={styles.text}>11. Tapşırığın adı</Text>
-          <Text style={styles.refuse}>İmtina edildi{'\n'}<Text style={styles.textdate}>23.12.2023</Text></Text>
-        </View> */}
-
-      </ScrollView>
-
-
+      </ScrollView> */}
     </SafeAreaView>
   );
 };
