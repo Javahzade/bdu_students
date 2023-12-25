@@ -29,15 +29,17 @@ const TeacherItem: React.FC<TeacherProps> = ({fullName, subjects}) => {
 };
 
 export const StepOne: React.FC = () => {
+  const navigation = useNavigation();
+
   const [searchValue, setSearchValue] = useState('');
   const [selectedTeacherId, setSelectedTeacherId] = useState(null);
   const {searchResult} = useTeachersQuery(undefined, {
     selectFromResult: ({data}) => ({searchResult: data}),
   });
 
-  const handleStep1 = (): void => {};
-
-  const navigation = useNavigation();
+  const handleNextStep = (): void => {
+    navigation.navigate('StepTwo', {params: {id: selectedTeacherId}});
+  };
 
   const gotoFilter = () => {
     navigation.navigate('Filters');
@@ -95,7 +97,12 @@ export const StepOne: React.FC = () => {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
       />
-      <AppButton label="Növbəti" style={styles.button} onPress={handleStep1} />
+      <AppButton
+        label="Növbəti"
+        disabled={!selectedTeacherId}
+        style={styles.button}
+        onPress={handleNextStep}
+      />
     </SafeAreaView>
   );
 };

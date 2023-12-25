@@ -56,7 +56,7 @@ export const Filters: React.FC = () => {
   const keyExtractor = React.useCallback(item => `${item.title}`, []);
 
   return (
-    <View style={styles.area1}>
+    <SafeAreaView edges={['bottom']} style={styles.area1}>
       <AppHeader title="Filter" />
       <FlatList
         style={styles.scroll}
@@ -71,7 +71,7 @@ export const Filters: React.FC = () => {
         style={styles.button}
         onPress={handleFilter}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginHorizontal: 20,
-    marginBottom: 16,
+    marginVertical: 16,
   },
   bodyArea: {
     flexDirection: 'row',

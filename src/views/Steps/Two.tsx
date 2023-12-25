@@ -4,40 +4,56 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {Fonts} from '../../utils/fonts';
 import {AppInput} from '../../components/AppInput';
 import {AppButton} from '../../components/AppButton';
-import ChevronRight from '../../SvgIcon/ChevronRight';
+import {AppHeader} from '../../components/AppHeader';
+import {useSendApplicationMutation} from '../../redux/queries/user';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../redux/store';
+import {useRoute} from '@react-navigation/native';
 
 export const StepTwo: React.FC = () => {
-  const [text, setText] = useState('');
-  const handleStep2 = (): void => {};
+  const route = useRoute();
+  const [theme, setTheme] = useState('');
+  const [subject, setSubject] = useState('');
+  const {id} = useSelector((state: RootState) => state.user);
+  const [apiSendApplication] = useSendApplicationMutation();
+
+  const handleSendApplication = (): void => {
+    apiSendApplication({
+      studentId: id,
+      teacherId: route.params.id,
+      workTheme: theme,
+      coveringLetter: subject,
+    }).then(res => console.log(res));
+  };
   return (
-    <SafeAreaView style={styles.area}>
-      <View style={styles.header}>
-        <View style={styles.iconText}>
-          <ChevronRight />
-          <Text style={styles.text1}>Müəllim seçimi</Text>
-        </View>
-        <Text style={styles.text2}>2/2</Text>
-      </View>
+    <SafeAreaView edges={['bottom']} style={styles.area}>
+      <AppHeader
+        title="Müəllim seçimi"
+        canGoBack
+        rightAccessory={<Text style={styles.text2}>2/2</Text>}
+      />
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContent}>
         <AppInput
           label="*Mövzu"
           placeholder="Mövzunu yaz"
-          style={styles.input}
-          onChangeText={text => setText(text)}
+          onChangeText={text => setTheme(text)}
         />
         <AppInput
           label="Əlavə qeyd"
           placeholder="Müəllimə əlavə qeyd yaz"
           style={styles.input1}
-          onChangeText={text => setText(text)}
+          // multiline
+          // numberOfLines={4}
+          onChangeText={text => setSubject(text)}
         />
       </ScrollView>
       <AppButton
         label="Müraciət et"
         style={styles.button}
-        onPress={handleStep2}
+        // disabled={!theme}
+        onPress={handleSendApplication}
       />
     </SafeAreaView>
   );
@@ -52,6 +68,8 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
+    paddingHorizontal: 20,
+    gap: 16,
   },
   iconText: {
     flexDirection: 'row',
@@ -74,14 +92,9 @@ const styles = StyleSheet.create({
     color: '#909EB0',
     fontFamily: Fonts.primary.Manrope.SemiBold,
   },
-  input: {
-    marginHorizontal: 16,
-  },
-  input1: {
-    marginTop: 26,
-  },
+  input1: {},
   button: {
     marginHorizontal: 20,
-    marginBottom: 16,
+    marginVertical: 16,
   },
 });
