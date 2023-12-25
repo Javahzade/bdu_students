@@ -17,9 +17,9 @@ const apiUser = apiQuery.injectEndpoints({
       },
     }),
     getApplication: builder.query({
-      query: params => {
+      query: id => {
         return {
-          url: ApiUrl.application + '/' + params.id,
+          url: ApiUrl.application + '/' + id,
           method: 'GET',
           headers: {
             Authorization: `Bearer ${store.getState().user.token}`,
@@ -42,4 +42,8 @@ const apiUser = apiQuery.injectEndpoints({
   }),
 });
 
-export const {useUserInfoQuery, useGetApplicationQuery} = apiUser;
+export const {
+  useUserInfoQuery,
+  useGetApplicationQuery,
+  useSendApplicationMutation,
+} = apiUser;

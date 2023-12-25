@@ -9,6 +9,7 @@ export const Root: React.FC = () => {
   const {token, id} = useSelector((state: RootState) => state.user);
 
   console.log(token);
+  console.log(id);
   return (
     <NavigationContainer>
       {token ? <MainStackNavigator /> : <AuthStackNavigator />}

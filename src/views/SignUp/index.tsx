@@ -25,6 +25,7 @@ export const SignUp = () => {
   const [groupNumberValue, setGroupNumberValue] = useState('');
   const [phoneNumberValue, setPhoneNumberValue] = useState('+994');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [apiCreateUser] = useCreateUserMutation();
 
   const onChangeUserNameText = (text: string): void => {
@@ -48,6 +49,7 @@ export const SignUp = () => {
   };
 
   const handleCreateUser = async (): Promise<void> => {
+    setLoading(true);
     apiCreateUser({
       firstName: userNameValue.split(' ')[0],
       lastName: userNameValue.split(' ')[1],
@@ -69,7 +71,8 @@ export const SignUp = () => {
           message: `Sistem xətası ${err.status}!`,
           type: 'danger',
         }),
-      );
+      )
+      .finally(() => setLoading(false));
   };
 
   const togglePasswordVisibility = (): void => {
@@ -132,6 +135,7 @@ export const SignUp = () => {
       <AppButton
         label="Qeydiyyatdan keç"
         style={styles.button}
+        loading={loading}
         disabled={
           !(userNameValue && groupNumberValue && emailValue && passwordValue)
         }

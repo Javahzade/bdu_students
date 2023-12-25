@@ -26,6 +26,7 @@ export const SignIn = () => {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [apiLogin] = useLoginMutation();
 
   const togglePasswordVisibility = (): void => {
@@ -33,6 +34,7 @@ export const SignIn = () => {
   };
 
   const handleLogIn = async (): Promise<void> => {
+    setLoading(true);
     apiLogin({
       email: emailValue,
       password: passwordValue,
@@ -46,7 +48,8 @@ export const SignIn = () => {
           message: `Sistem xətası ${err.status}!`,
           type: 'danger',
         });
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   const handleSignUp = (): void => {
@@ -100,6 +103,7 @@ export const SignIn = () => {
       <AppButton
         label="Daxil olun"
         disabled={!(emailValue && passwordValue)}
+        loading={loading}
         onPress={handleLogIn}
       />
       <AppButton

@@ -4,7 +4,6 @@ import {DrawerNavigator} from './Drawer';
 import {StepOne} from '../views/Steps/One';
 import {StepTwo} from '../views/Steps/Two';
 import {Filters} from '../views/Steps/Filters';
-import TaskScreen from '../views/TaskScreen';
 import TaskDetailScreen from '../views/TaskDetailScreen';
 
 const Stack = createStackNavigator();
@@ -20,8 +19,8 @@ export const MainStackNavigator = () => {
         <Stack.Screen name="StepOne" component={StepOne} />
         <Stack.Screen name="StepTwo" component={StepTwo} />
         <Stack.Screen name="Filters" component={Filters} />
-        <Stack.Screen name="TaskDetailScreen" component={TaskDetailScreen} />
       </Stack.Group>
+      <Stack.Screen name="TaskDetailScreen" component={TaskDetailScreen} />
     </Stack.Navigator>
   );
 };

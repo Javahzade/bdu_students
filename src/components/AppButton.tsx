@@ -1,10 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
 import {AppColors} from '../utils/colors';
 import {Fonts} from '../utils/fonts';
 
 interface Props {
   label: string;
+  loading?: boolean;
   style?: ViewStyle;
   variant?: 'primary' | 'secondary' | 'danger';
   disabled?: boolean;
@@ -13,6 +20,7 @@ interface Props {
 
 export const AppButton: React.FC<Props> = ({
   label,
+  loading,
   variant = 'primary',
   style,
   disabled,
@@ -32,7 +40,11 @@ export const AppButton: React.FC<Props> = ({
       disabled={disabled}
       style={[styles.button, {backgroundColor, opacity}, style]}
       onPress={onPress}>
-      <Text style={[styles.label, {color}]}>{label}</Text>
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <Text style={[styles.label, {color}]}>{label}</Text>
+      )}
     </TouchableOpacity>
   );
 };

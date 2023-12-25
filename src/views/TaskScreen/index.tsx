@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   ScrollView,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {AppColors} from '../../utils/colors';
 import {Fonts} from '../../utils/fonts';
-import {useNavigation} from '@react-navigation/native';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 import MenuIcon from '../../assets/icons/MenuIcon.svg';
 import TaskCard from './components/TaskCard';
 import {useGetApplicationQuery} from '../../redux/queries/user';
@@ -21,52 +21,14 @@ import {AppHeader} from '../../components/AppHeader';
 export const TaskScreen = ({}) => {
   const navigation = useNavigation();
   const {id} = useSelector((state: RootState) => state.user);
-  const {data} = useGetApplicationQuery(id);
+  const {data} = useGetApplicationQuery(id, {pollingInterval: 3000});
+
   console.log(data);
   const gotoWorkName = () => {
     navigation.navigate('TaskDetailScreen');
   };
 
   const onPressTask = (taskId: number) => {};
-
-  const mockData = [
-    {
-      taskTitle: 'Tapşırıq 1',
-      taskStatus: 'Yoxdur',
-      statusDate: '10.11.2022',
-      id: 1,
-    },
-    {
-      taskTitle: 'Tapşırıq 2',
-      taskStatus: 'Yoxdur',
-      statusDate: '10.11.2022',
-      id: 2,
-    },
-    {
-      taskTitle: 'Tapşırıq 3',
-      taskStatus: 'Yoxdur',
-      statusDate: '10.11.2022',
-      id: 3,
-    },
-    {
-      taskTitle: 'Tapşırıq 4',
-      taskStatus: 'Yoxdur',
-      statusDate: '10.11.2022',
-      id: 4,
-    },
-    {
-      taskTitle: 'Tapşırıq 5',
-      taskStatus: 'Yoxdur',
-      statusDate: '10.11.2022',
-      id: 5,
-    },
-    {
-      taskTitle: 'Tapşırıq 6',
-      taskStatus: 'Yoxdur',
-      statusDate: '10.11.2022',
-      id: 6,
-    },
-  ];
 
   const rejectApplication = () => {
     console.log('rejectApplication');
@@ -87,6 +49,8 @@ export const TaskScreen = ({}) => {
         </View>
       );
     }
+
+    return <TaskCard {...data} />;
   }, [data, handleNewApplication]);
 
   return (
@@ -94,7 +58,8 @@ export const TaskScreen = ({}) => {
       <AppHeader
         title="Mənim işlərim"
         rightAccessory={
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
             <MenuIcon />
           </TouchableOpacity>
         }
