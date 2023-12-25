@@ -4,4 +4,5 @@ export const ApiUrl = {
   login: '/Login',
   teacher: '/Teacher',
   options: '/Options',
+  application: '/Application',
 };

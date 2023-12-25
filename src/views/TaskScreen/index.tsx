@@ -1,64 +1,132 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {FlatList, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {AppColors} from '../../utils/colors';
 import {Fonts} from '../../utils/fonts';
-import {ScrollView} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
-import MenuIcon from "../../assets/icons/MenuIcon.svg";
-import TaskItem from './components/TaskItem';
+import MenuIcon from '../../assets/icons/MenuIcon.svg';
 import TaskCard from './components/TaskCard';
-
-
-
+import {useGetApplicationQuery} from '../../redux/queries/user';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../redux/store';
+import {AppButton} from '../../components/AppButton';
+import {AppHeader} from '../../components/AppHeader';
 
 export const TaskScreen = ({}) => {
   const navigation = useNavigation();
+  const {id} = useSelector((state: RootState) => state.user);
+  const {data} = useGetApplicationQuery(id);
+  console.log(data);
   const gotoWorkName = () => {
     navigation.navigate('TaskDetailScreen');
   };
 
-
-  const onPressTask = (taskId: number) => {
-
-  };
+  const onPressTask = (taskId: number) => {};
 
   const mockData = [
-    {taskTitle: 'Tapşırıq 1', taskStatus: 'Yoxdur', statusDate: '10.11.2022', id: 1},
-    {taskTitle: 'Tapşırıq 2', taskStatus: 'Yoxdur', statusDate: '10.11.2022', id: 2},
-    {taskTitle: 'Tapşırıq 3', taskStatus: 'Yoxdur', statusDate: '10.11.2022', id: 3},
-    {taskTitle: 'Tapşırıq 4', taskStatus: 'Yoxdur', statusDate: '10.11.2022', id: 4},
-    {taskTitle: 'Tapşırıq 5', taskStatus: 'Yoxdur', statusDate: '10.11.2022', id: 5},
-    {taskTitle: 'Tapşırıq 6', taskStatus: 'Yoxdur', statusDate: '10.11.2022', id: 6},
+    {
+      taskTitle: 'Tapşırıq 1',
+      taskStatus: 'Yoxdur',
+      statusDate: '10.11.2022',
+      id: 1,
+    },
+    {
+      taskTitle: 'Tapşırıq 2',
+      taskStatus: 'Yoxdur',
+      statusDate: '10.11.2022',
+      id: 2,
+    },
+    {
+      taskTitle: 'Tapşırıq 3',
+      taskStatus: 'Yoxdur',
+      statusDate: '10.11.2022',
+      id: 3,
+    },
+    {
+      taskTitle: 'Tapşırıq 4',
+      taskStatus: 'Yoxdur',
+      statusDate: '10.11.2022',
+      id: 4,
+    },
+    {
+      taskTitle: 'Tapşırıq 5',
+      taskStatus: 'Yoxdur',
+      statusDate: '10.11.2022',
+      id: 5,
+    },
+    {
+      taskTitle: 'Tapşırıq 6',
+      taskStatus: 'Yoxdur',
+      statusDate: '10.11.2022',
+      id: 6,
+    },
   ];
 
-
   const rejectApplication = () => {
-    console.log("rejectApplication");
+    console.log('rejectApplication');
   };
+
+  const handleNewApplication = React.useCallback(() => {
+    navigation.navigate('StepOne');
+  }, [navigation]);
+
+  const renderContent = React.useMemo(() => {
+    if (!data) {
+      return (
+        <View style={styles.info}>
+          <Text style={styles.infoText}>
+            Hal-hazırda, heç bir müraciətiniz yoxdur.{'\n'}Diplom seçimi üçün
+          </Text>
+          <AppButton label="Müraciət et" onPress={handleNewApplication} />
+        </View>
+      );
+    }
+  }, [data, handleNewApplication]);
 
   return (
     <SafeAreaView style={styles.container}>
-
-      <View style={styles.header}>
-        <Text style={styles.textheader}>Mənim işlərim</Text>
-        <TouchableOpacity>
-          <MenuIcon />
-        </TouchableOpacity>
-      </View>
-      <View style={{flexShrink: 1, gap: 5}}>
+      <AppHeader
+        title="Mənim işlərim"
+        rightAccessory={
+          <TouchableOpacity>
+            <MenuIcon />
+          </TouchableOpacity>
+        }
+      />
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContent}>
+        {renderContent}
+      </ScrollView>
+      {/* <View style={{flexShrink: 1, gap: 5}}>
         <TaskCard />
         <TaskCard />
         <TaskCard />
         <TouchableOpacity
           onPress={rejectApplication}
-          style={{justifyContent: 'center', width: '100%', height: 50, backgroundColor: AppColors.danger, borderRadius: 10}}>
-          <Text style={{fontWeight: '700', textAlign: 'center', color: AppColors.white}}>
+          style={{
+            justifyContent: 'center',
+            width: '100%',
+            height: 50,
+            backgroundColor: AppColors.danger,
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              fontWeight: '700',
+              textAlign: 'center',
+              color: AppColors.white,
+            }}>
             {'Müraciəti ləğv et'}
           </Text>
         </TouchableOpacity>
-      </View>
-
+      </View> */}
 
       {/* <View style={styles.body}>
         <Text style={styles.bodyText}>Müəllim:</Text>
@@ -89,20 +157,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: AppColors.white,
-    paddingHorizontal: 16,
   },
   header: {
     height: 60,
     width: '100%',
     marginTop: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignSelf: "center",
-    alignItems: "center"
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  scroll: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingHorizontal: 20,
   },
   textheader: {
     fontSize: 26,
-    color: AppColors.blueDark
+    color: AppColors.blueDark,
   },
   body: {
     marginTop: 12,
@@ -111,10 +185,10 @@ const styles = StyleSheet.create({
     height: 60,
     width: '100%',
     marginTop: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignSelf: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+    alignItems: 'center',
   },
   bodyText: {
     fontSize: 14,
@@ -138,7 +212,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   accept: {
-    color: "green",
+    color: 'green',
     fontSize: 17,
   },
   refuse: {
@@ -147,6 +221,17 @@ const styles = StyleSheet.create({
   },
   textdate: {
     color: AppColors.grayLight,
+  },
+  infoText: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontFamily: Fonts.primary.Manrope.Medium,
+    color: AppColors.blueLight,
+  },
+  info: {
+    gap: 24,
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 export default TaskScreen;

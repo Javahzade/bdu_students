@@ -6,7 +6,9 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../redux/store';
 
 export const Root: React.FC = () => {
-  const {token} = useSelector((state: RootState) => state.user);
+  const {token, id} = useSelector((state: RootState) => state.user);
+
+  console.log(token);
   return (
     <NavigationContainer>
       {token ? <MainStackNavigator /> : <AuthStackNavigator />}
