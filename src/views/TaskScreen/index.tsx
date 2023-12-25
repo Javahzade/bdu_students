@@ -33,6 +33,10 @@ export const TaskScreen = ({}) => {
   ];
 
 
+  const rejectApplication = () => {
+    console.log("rejectApplication");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
 
@@ -42,7 +46,17 @@ export const TaskScreen = ({}) => {
           <MenuIcon />
         </TouchableOpacity>
       </View>
-      <TaskCard />
+      <View style={{flexShrink: 1}}>
+        <TaskCard />
+        <TouchableOpacity
+          onPress={rejectApplication}
+          style={{marginTop: 10, justifyContent: 'center', width: '100%', height: 50, backgroundColor: AppColors.danger, borderRadius: 10}}>
+          <Text style={{fontWeight: '700', textAlign: 'center', color: AppColors.white}}>
+            {'Müraciəti ləğv et'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
 
       {/* <View style={styles.body}>
         <Text style={styles.bodyText}>Müəllim:</Text>
