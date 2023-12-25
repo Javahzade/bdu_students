@@ -46,11 +46,13 @@ export const TaskScreen = ({}) => {
           <MenuIcon />
         </TouchableOpacity>
       </View>
-      <View style={{flexShrink: 1}}>
+      <View style={{flexShrink: 1, gap: 5}}>
+        <TaskCard />
+        <TaskCard />
         <TaskCard />
         <TouchableOpacity
           onPress={rejectApplication}
-          style={{marginTop: 10, justifyContent: 'center', width: '100%', height: 50, backgroundColor: AppColors.danger, borderRadius: 10}}>
+          style={{justifyContent: 'center', width: '100%', height: 50, backgroundColor: AppColors.danger, borderRadius: 10}}>
           <Text style={{fontWeight: '700', textAlign: 'center', color: AppColors.white}}>
             {'Müraciəti ləğv et'}
           </Text>
